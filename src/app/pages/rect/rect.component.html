@@ -1,0 +1,95 @@
+
+
+
+ <!-- <p>Form value: {{ it.value | json }}</p> -->
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4 text-center">Rectangular</h1>
+  </div>
+</div>
+<form #it="ngForm" (ngSubmit)="onSubmit(it)" novalidate>
+<div class="container-fluid">
+  <div class="row no-gutters">
+    <div class="col-12">
+      <svg-container containerId="rectangular" [height]="getHeight()">
+        <svg-rect [height]="rectangular.height" [width]="rectangular.width" [color]="rectangular.color"
+          [rx]="rectangular.rx" [ry]="rectangular.ry" [x]="rectangular.x" [y]="rectangular.y"
+          *ngFor="let rectangular of rectangulars"></svg-rect>
+      </svg-container>
+    </div>
+
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>SL</th>
+              <th>Height</th>
+              <th>Width</th>
+              <th>Color</th>
+              <th>X position</th>
+              <th>Y position</th>
+              <th>X radius (rx)</th>
+              <th>Y radius (ry)</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="rectangulars.length > 0">
+              <tr *ngFor="let rectangular of rectangulars; let index = index;">
+                <td class="align-middle">
+                  <b>{{ index + 1 }}</b>
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="rectangular.height" name="height" class="form-control" />
+
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="rectangular.width" name="width" class="form-control" />
+                </td>
+                <td>
+                  <input type="string" [(ngModel)]="rectangular.color" name="color" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="rectangular.x" name="x" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="rectangular.y" name="y" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="rectangular.rx" name="rx" class="form-control" />
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="rectangular.ry" name="ry" class="form-control" />
+                </td>
+                <td>
+                  <button class="btn btn-danger" (click)="removeRow(index)">Remove</button>
+                </td>
+              </tr>
+            </ng-container>
+            <tr *ngIf="rectangulars.length === 0">
+              <td colspan="9" class="text-center">
+                There are no rectangulars
+              </td>
+            </tr>
+          </tbody>
+          <br>
+          <tfoot>
+            <tr>
+              <td colspan="9">
+                <button class="btn btn-success float-right" (click)="addNew()">Add New Rectangular</button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="9">
+                <button class="btn btn-primary">Submit</button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
